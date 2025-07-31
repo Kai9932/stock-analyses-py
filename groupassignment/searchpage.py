@@ -75,9 +75,6 @@ class SearchPage(QtWidgets.QMainWindow):
 
     #ideas and method from https://www.geeksforgeeks.org/nlp/stock-price-prediction-project-using-tensorflow/
     #ideas and method from https://medium.com/@deepml1818/predicting-stock-prices-using-lstm-and-yahoo-finance-data-0e2534b269a1
-#however we used yfinance, which previous data is from selected company like AAPL
-#ours program can predict others data with the input field that user input which it will get the data from yfinance and
-#analyse it.
 
     def run_prediction(self):
         user_input = self.ui.textEdit_4.toPlainText().strip().upper()
@@ -133,7 +130,6 @@ class SearchPage(QtWidgets.QMainWindow):
                 model.fit(x_train, y_train, epochs=5, verbose=0)
                 model.save(model_filename)
 
-            # Prepare test data
             test_data = scaled_data[training_data_len - 60:, :]
             x_test = []
             for i in range(60, len(test_data)):
@@ -163,7 +159,6 @@ class SearchPage(QtWidgets.QMainWindow):
             plt.plot(test['Date'], test['Close'], label="Test")
             plt.plot(test['Date'], test['Predictions'], label="Predicted")
 
-            # label
             last_date = test['Date'].iloc[-1]
             last_price = test['Predictions'].iloc[-1]
             plt.annotate(
